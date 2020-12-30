@@ -3,10 +3,9 @@ import re
 url = 'https://m.weibo.cn/api/comments/show?id=4467107636950632&page=1'
 headers = {'Cookies':'your cookie',
 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'}
-tags = re.compile('</?\w+[^>]*>')
 clean = re.compile('<.*?>')
-
 last_id = ''
+
 while True:
   try:
     j = requests.get(url, headers=headers).json()
