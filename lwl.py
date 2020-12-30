@@ -8,11 +8,14 @@ clean = re.compile('<.*?>')
 
 last_id = ''
 while True:
-  j = requests.get(url, headers=headers).json()
-  latest_comment = j['data']['data'][0]
-  latest_id = latest_comment['id']
-  if (latest_id != last_id):
-    last_id = latest_id
-    comment_text = re.sub(clean, '', latest_comment['text'])
-    comment_user = re.sub(clean, '', latest_comment['user']['screen_name'])
-    print(comment_text + '   [' + comment_user + '] \n')
+  try:
+    j = requests.get(url, headers=headers).json()
+    latest_comment = j['data']['data'][0]
+    latest_id = latest_comment['id']
+    if (latest_id != last_id):
+      last_id = latest_id
+      comment_text = re.sub(clean, '', latest_comment['text'])
+      comment_user = re.sub(clean, '', latest_comment['user']['screen_name'])
+      print(comment_text + '   [' + comment_user + '] \n')
+  except:
+    continue
